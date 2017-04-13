@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Unit;
 
+use App\Calculator;
 use Mockery as m;
 use Tests\TestCase;
 
