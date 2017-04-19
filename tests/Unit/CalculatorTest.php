@@ -7,6 +7,13 @@ use Tests\TestCase;
 
 class CalculatorTest extends TestCase {
 
+    protected $calc;
+
+    public function setUp(): void
+    {
+        $this->calc = new Calculator;
+    }
+
     protected function tearDown()
     {
         m::close();
@@ -18,7 +25,6 @@ class CalculatorTest extends TestCase {
     public function testInstance()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
 
@@ -34,13 +40,12 @@ class CalculatorTest extends TestCase {
     public function testResultDefaultToZero()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
         $expected = 0;
 
         /** Act */
-        $actual = $target->getResult();
+        $actual = $this->calc->getResult();
 
         /** Assert */
         $this->assertSame($expected, $actual);
@@ -53,14 +58,13 @@ class CalculatorTest extends TestCase {
     public function testAddNumbers()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
         $expected = 5;
 
         /** Act */
-        $target->add(5);
-        $actual = $target->getResult();
+        $this->calc->add(5);
+        $actual = $this->calc->getResult();
 
             /** Assert */
         $this->assertSame($expected, $actual);
@@ -72,13 +76,12 @@ class CalculatorTest extends TestCase {
     public function testRequiresNumericValue()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
         $this->expectException(\InvalidArgumentException::class);
 
         /** Act */
-        $target->add('five');
+        $this->calc->add('five');
 
         /** Assert */
 
@@ -90,14 +93,13 @@ class CalculatorTest extends TestCase {
     public function testAcceptsMultipleArgs()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
         $expected = 10;
 
         /** Act */
-        $target->add(1, 2, 3, 4);
-        $actual = $target->getResult();
+        $this->calc->add(1, 2, 3, 4);
+        $actual = $this->calc->getResult();
 
         /** Assert */
         $this->assertSame($expected, $actual);
@@ -109,14 +111,13 @@ class CalculatorTest extends TestCase {
     public function testSubtractNumbers()
     {
         /** Arrange */
-        $target = new Calculator;
 
         /** Assume */
         $expected = -4;
 
         /** Act */
-        $target->subtract(4);
-        $actual = $target->getResult();
+        $this->calc->subtract(4);
+        $actual = $this->calc->getResult();
 
         /** Assert */
         $this->assertSame($expected, $actual);
