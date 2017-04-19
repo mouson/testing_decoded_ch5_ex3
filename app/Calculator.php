@@ -21,4 +21,14 @@ class Calculator
             $this->result += $num;
         }
     }
+
+    public function subtract($int)
+    {
+        foreach (func_get_args() as $num) {
+            if (! is_numeric($num)) {
+                throw new \InvalidArgumentException;
+            }
+            $this->result -= $num;
+        }
+    }
 }
