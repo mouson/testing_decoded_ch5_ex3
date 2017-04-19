@@ -103,4 +103,22 @@ class CalculatorTest extends TestCase {
         $this->assertSame($expected, $actual);
     }
 
+    /**
+     * @test
+     */
+    public function testSubtractNumbers()
+    {
+        /** Arrange */
+        $target = new Calculator;
+
+        /** Assume */
+        $expected = -4;
+
+        /** Act */
+        $target->subtract(4);
+        $actual = $target->getResult();
+
+        /** Assert */
+        $this->assertSame($expected, $actual);
+    }
 }
