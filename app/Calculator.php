@@ -12,11 +12,13 @@ class Calculator
         return $this->result;
     }
 
-    public function add($num)
+    public function add()
     {
-        if (! is_numeric($num)) {
-            throw new \InvalidArgumentException;
+        foreach (func_get_args() as $num) {
+            if (! is_numeric($num)) {
+                throw new \InvalidArgumentException;
+            }
+            $this->result += $num;
         }
-        $this->result += $num;
     }
 }
