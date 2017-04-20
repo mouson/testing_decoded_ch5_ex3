@@ -6,38 +6,39 @@ class Calculator
 {
 
     protected $result = 0;
+    /**
+     * @var array
+     */
+    protected $operands = [];
+    /**
+     * @var Operation
+     */
+    protected $operation;
 
     public function getResult()
     {
         return $this->result;
     }
 
-    public function add()
+    public function setOperands()
     {
-        $this->calculateAll(func_get_args(), '+');
+        $this->operands = func_get_args();
     }
 
-    public function subtract($int)
+    public function setOperation(Operation $operation)
     {
-        $this->calculateAll(func_get_args(), '-');
+        $this->operation = $operation;
     }
 
-    protected function calculateAll(array $numbers, $symbol): void
+    public function calculate()
     {
-        foreach ($numbers as $num) {
+        foreach ($this->operands as $num)
+        {
             if (!is_numeric($num)) {
                 throw new \InvalidArgumentException;
             }
-            switch ($symbol)
-            {
-                case '+':
-                    $this->result += $num;
-                    break;
-
-                case '-';
-                    $this->result -= $num;
-                    break;
-            }
+            $this->result = $this->operation->run($num, $this->result);
         }
+        return $this->result;
     }
 }
