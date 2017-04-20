@@ -3,6 +3,7 @@ namespace Tests\Unit;
 
 use App\Addition;
 use App\Calculator;
+use App\Subtract;
 use Mockery as m;
 use Tests\TestCase;
 
@@ -117,13 +118,14 @@ class CalculatorTest extends TestCase {
     public function testSubtractNumbers()
     {
         /** Arrange */
+        $this->calc->setOperands(4);
+        $this->calc->setOperation(new Subtract);
 
         /** Assume */
         $expected = -4;
 
         /** Act */
-        $this->calc->subtract(4);
-        $actual = $this->calc->getResult();
+        $actual = $this->calc->calculate();
 
         /** Assert */
         $this->assertSame($expected, $actual);
