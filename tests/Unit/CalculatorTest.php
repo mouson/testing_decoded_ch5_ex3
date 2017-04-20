@@ -79,12 +79,14 @@ class CalculatorTest extends TestCase {
     public function testRequiresNumericValue()
     {
         /** Arrange */
+        $this->calc->setOperands("five");
+        $this->calc->setOperation(new Addition);
 
         /** Assume */
         $this->expectException(\InvalidArgumentException::class);
 
         /** Act */
-        $this->calc->add('five');
+        $actual = $this->calc->calculate();
 
         /** Assert */
 
@@ -96,13 +98,14 @@ class CalculatorTest extends TestCase {
     public function testAcceptsMultipleArgs()
     {
         /** Arrange */
+        $this->calc->setOperands(1, 2, 3, 4);
+        $this->calc->setOperation(new Addition);
 
         /** Assume */
         $expected = 10;
 
         /** Act */
-        $this->calc->add(1, 2, 3, 4);
-        $actual = $this->calc->getResult();
+        $actual = $this->calc->calculate();
 
         /** Assert */
         $this->assertSame($expected, $actual);
