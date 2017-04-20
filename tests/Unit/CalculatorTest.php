@@ -3,6 +3,7 @@ namespace Tests\Unit;
 
 use App\Addition;
 use App\Calculator;
+use App\Multiplication;
 use App\Subtract;
 use Mockery as m;
 use Tests\TestCase;
@@ -123,6 +124,25 @@ class CalculatorTest extends TestCase {
 
         /** Assume */
         $expected = -4;
+
+        /** Act */
+        $actual = $this->calc->calculate();
+
+        /** Assert */
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function testMultipliesNumbers()
+    {
+        /** Arrange */
+        $this->calc->setOperands(3, 3, 3);
+        $this->calc->setOperation(new Multiplication);
+
+        /** Assume */
+        $expected = 27;
 
         /** Act */
         $actual = $this->calc->calculate();
